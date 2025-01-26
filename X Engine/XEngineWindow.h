@@ -14,7 +14,9 @@ class XEngineWindow
 {
 public:
 	void CreateXEngineWindow(string windowName, int windowWidth, int windowHeight);
-	void UpdateXEngineWindowBackgroundColor();
+	void HandleXEngineWindowEvents();
+	bool RecieveXEngineWindowEvents();
+	void ClearXEngineWindow();
 	void DestroyXEngineWindow();
 
 	XEngineWindow();
@@ -26,5 +28,8 @@ public:
 
 private:
 	SDL_Window* engineWindow;
+	SDL_Event engineWindowEvent;
+
+	bool recieveEngineWindowUpdates = true;
 };
 

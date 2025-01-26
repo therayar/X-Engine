@@ -16,13 +16,11 @@ void XEngineShader::AttachShader(const std::string& shaderPath, GLenum shaderTyp
 
     std::string shaderCodeString{ReadShader(shaderPath)};
 
-    const char* shaderCodeCString{shaderCodeString.c_str()};
-
     const char* shaderCode[1];
-    shaderCode[0] = shaderCodeCString;
+    shaderCode[0] = shaderCodeString.c_str();
 
     GLint codeLength[1];
-    codeLength[0] = strlen(shaderCodeCString);
+    codeLength[0] = strlen(shaderCodeString.c_str());
 
     glShaderSource(shader, 1, shaderCode, codeLength);
     glCompileShader(shader);
@@ -114,6 +112,18 @@ void XEngineShader::DestroyShader()
         glDeleteProgram(shaderProgram);
         shaderProgram = 0;
     }
+}
+
+XEngineShader::XEngineShader() :
+    shaderProgram(0),
+    shaderUniformLocations()
+{
+
+}
+
+XEngineShader::~XEngineShader()
+{
+    DestroyShader();
 }
 
 GLuint XEngineShader::FetchShader()

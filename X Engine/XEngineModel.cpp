@@ -35,9 +35,9 @@ void XEngineModel::RenderModel()
 
     modelMatrix = glm::translate(modelMatrix, glm::vec3(0.0f, 0.0f, 0.0f));
 
-    modelMatrix = glm::rotate(modelMatrix, glm::radians(45.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-    modelMatrix = glm::rotate(modelMatrix, glm::radians(45.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-    modelMatrix = glm::rotate(modelMatrix, glm::radians(45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+    modelMatrix = glm::rotate(modelMatrix, glm::radians(0.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+    modelMatrix = glm::rotate(modelMatrix, glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    modelMatrix = glm::rotate(modelMatrix, glm::radians(0.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 
     modelMatrix = glm::scale(modelMatrix, glm::vec3(0.5f, 0.5f, 0.5f));
 
@@ -54,10 +54,38 @@ void XEngineModel::RenderModel()
 
 void XEngineModel::DestroyModel()
 {
+    if (modelVertexArray != 0)
+    {
+        glDeleteVertexArrays(1, &modelVertexArray);
+        modelVertexArray = 0;
+    }
+
+    if (modelVertexBuffer != 0)
+    {
+        glDeleteBuffers(1, &modelVertexBuffer);
+        modelVertexBuffer = 0;
+    }
+
+    if (modelIndexBuffer != 0)
+    {
+        glDeleteBuffers(1, &modelIndexBuffer);
+        modelIndexBuffer = 0;
+    }
+}
+
+XEngineModel::XEngineModel() :
+    modelShader(XEngineShader()),
+    modelVertices(0),
+    modelIndices(0),
+    modelVertexArray(0),
+    modelVertexBuffer(0),
+    modelIndexBuffer(0),
+    modelMatrix(glm::mat4(1.0f))
+{
 
 }
 
-void XEngineModel::FetchModelShaderUniforms()
+XEngineModel::~XEngineModel()
 {
-    modelMatrixUniformLocation = modelShader.FetchShaderUniform("model");
+    DestroyModel();
 }

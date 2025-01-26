@@ -9,8 +9,6 @@ class XEngine
 {
 public:
 	void InitializeXEngine();
-	void HandleXEngineWindowEvents();
-	bool RecieveXEngineWindowEvents();
 	void UpdateXEngine();
 	void DestroyXEngine();
 
@@ -21,8 +19,5 @@ public:
 
 private:
 	SDL_GLContext engineOpenGLContext;
-	SDL_Event engineWindowEvent;
-
-	bool recieveXEngineUpdates = true;
 };
 

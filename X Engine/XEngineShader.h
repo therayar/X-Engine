@@ -20,6 +20,9 @@ public:
 	void UseShader();
 	void DestroyShader();
 
+	XEngineShader();
+	~XEngineShader();
+
 	GLuint FetchShader();
 	GLint FetchShaderUniform(const std::string& uniformName);
 

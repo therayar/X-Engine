@@ -17,7 +17,8 @@ public:
 	void RenderModel();
 	void DestroyModel();
 
-	void FetchModelShaderUniforms();
+	XEngineModel();
+	~XEngineModel();
 
 	XEngineShader modelShader;
 
@@ -29,7 +30,5 @@ private:
 	GLuint modelVertexBuffer, modelIndexBuffer;
 
 	glm::mat4 modelMatrix;
-
-	GLint modelMatrixUniformLocation;
 };
 

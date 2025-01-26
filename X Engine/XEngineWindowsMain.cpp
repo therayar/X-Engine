@@ -49,20 +49,12 @@ int main(int argc, char* argv[])
 
     xEngineShader.LinkShader();
 
-    pyramidModel.FetchModelShaderUniforms();
-
-    while (xEngine.RecieveXEngineWindowEvents())
+    while (xEngineWindow.RecieveXEngineWindowEvents())
     {
-        xEngine.HandleXEngineWindowEvents();
-
-        xEngineWindow.UpdateXEngineWindowBackgroundColor();
+        xEngineWindow.HandleXEngineWindowEvents();
+        xEngineWindow.ClearXEngineWindow();
 
         xEngineShader.UseShader();
-
-        int bufferWidth, bufferHeight;
-        SDL_GetWindowSize(xEngineWindow.GetXEngineWindow(), &bufferWidth, &bufferHeight);
-
-        glViewport(0, 0, bufferWidth, bufferHeight);
 
         pyramidModel.RenderModel();
 

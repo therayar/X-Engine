@@ -54,7 +54,31 @@ void XEngineWindow::CreateXEngineWindow(string windowName, int windowWidth, int 
     }
 }
 
-void XEngineWindow::UpdateXEngineWindowBackgroundColor()
+void XEngineWindow::HandleXEngineWindowEvents()
+{
+    while (SDL_PollEvent(&engineWindowEvent))
+    {
+        if (engineWindowEvent.type == SDL_QUIT)
+        {
+            recieveEngineWindowUpdates = false;
+        }
+
+        if (engineWindowEvent.type == SDL_WINDOWEVENT && engineWindowEvent.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
+        {
+            int bufferWidth, bufferHeight;
+            SDL_GetWindowSize(engineWindow, &bufferWidth, &bufferHeight);
+
+            glViewport(0, 0, bufferWidth, bufferHeight);
+        }
+    }
+}
+
+bool XEngineWindow::RecieveXEngineWindowEvents()
+{
+    return recieveEngineWindowUpdates;
+}
+
+void XEngineWindow::ClearXEngineWindow()
 {
     glClearColor(0.035f, 0.040f, 0.045f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

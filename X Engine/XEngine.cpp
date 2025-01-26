@@ -35,22 +35,6 @@ void XEngine::InitializeXEngine()
     glEnable(GL_DEPTH_TEST);
 }
 
-void XEngine::HandleXEngineWindowEvents()
-{
-    while (SDL_PollEvent(&engineWindowEvent))
-    {
-        if (engineWindowEvent.type == SDL_QUIT)
-        {
-            recieveXEngineUpdates = false;
-        }
-    }
-}
-
-bool XEngine::RecieveXEngineWindowEvents()
-{
-    return recieveXEngineUpdates;
-}
-
 void XEngine::UpdateXEngine()
 {
     glUseProgram(0);
@@ -76,9 +60,7 @@ void XEngine::DestroyXEngine()
 
 XEngine::XEngine() : 
     engineOpenGLContext(nullptr),
-    recieveXEngineUpdates(true),
-    engineWindow(XEngineWindow()),
-    engineWindowEvent(SDL_Event())
+    engineWindow(XEngineWindow())
 {
 
 }
